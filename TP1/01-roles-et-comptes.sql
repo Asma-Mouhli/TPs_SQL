@@ -56,7 +56,7 @@ SELECT GRANTEE, TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME, PRIVILEGE_TYPE, IS_GRANTA
  ORDER BY GRANTEE, TABLE_NAME, COLUMN_NAME, PRIVILEGE_TYPE;
 
 -- Cycle demande. Les quatre commandes restent consecutives dans le script.
--- Pour tester le SELECT intermediaire avec analyste, voir GUIDE.md, test 12.
+-- Pour tester le SELECT intermediaire avec analyste, voir PROCEDURE-DE-TESTS.md, test 12.
 GRANT SELECT ON mediatheque.reservation TO 'analyste'@'localhost';
 SHOW GRANTS FOR 'analyste'@'localhost';
 REVOKE SELECT ON mediatheque.reservation FROM 'analyste'@'localhost';

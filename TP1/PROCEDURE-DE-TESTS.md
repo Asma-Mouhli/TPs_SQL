@@ -1,20 +1,20 @@
-# TP1 — Correction et exécution
+# TP1 — Procédure de vérification
 
-Le fichier à rendre pour les comptes est **01-roles-et-comptes.sql**. Il contient les trois rôles, les quatre comptes locaux, les privilèges de colonne, l'activation automatique, les vérifications, le cycle GRANT/REVOKE et les bonus. La matrice fournit le corrigé théorique et laisse « Obtenu » à compléter avec les résultats réels. Aucun test sur un serveur n'a été exécuté lors de la préparation de ce dossier.
+Cette procédure décrit les vérifications à exécuter sur MySQL 8. Les valeurs attendues ne constituent pas des résultats observés.
 
 ## 1. Vérifier le logiciel
 
-Dans ton client SQL :
+Dans le client SQL :
 
 ```sql
 SELECT VERSION();
 ```
 
-Cette correction utilise **MySQL 8**. Ne l'exécute pas dans `psql` : PostgreSQL a une autre gestion des comptes. La compatibilité MariaDB annoncée dans le schéma concerne les tables ; MariaDB a une syntaxe différente pour les rôles par défaut et n'active qu'un rôle à la fois. Le script de comptes nécessite donc une adaptation sur MariaDB.
+Ce script utilise **MySQL 8**. Le script ne doit pas être exécuté dans `psql` : PostgreSQL a une autre gestion des comptes. La compatibilité MariaDB annoncée dans le schéma concerne les tables ; MariaDB a une syntaxe différente pour les rôles par défaut et n'active qu'un rôle à la fois. Le script de comptes nécessite donc une adaptation sur MariaDB.
 
 ## 2. Charger la base
 
-Ouvre un terminal dans le dossier extrait :
+Depuis un terminal ouvert dans le dossier TP1 :
 
 ```bash
 mysql -u root -p < Base/01-schema.sql
@@ -31,7 +31,7 @@ mysql -u root -p --table < 01-roles-et-comptes.sql > preuves-execution-1.txt 2>&
 mysql -u root -p --table < 01-roles-et-comptes.sql > preuves-execution-2.txt 2>&1
 ```
 
-Vérifie l'absence d'erreurs dans les deux fichiers. Ils contiennent les sorties réelles de SHOW GRANTS et de COLUMN_PRIVILEGES demandées par le professeur. Si ton installation utilise l'authentification administrateur par socket, utilise son mode de connexion habituel (par exemple `sudo mysql`) à la place de `mysql -u root -p`.
+L'absence d'erreurs doit être vérifiée dans les deux fichiers. Ils contiennent les sorties réelles de SHOW GRANTS et de COLUMN_PRIVILEGES demandées par le professeur. Si l’installation utilise l'authentification administrateur par socket, utiliser son mode de connexion habituel (par exemple `sudo mysql`) à la place de `mysql -u root -p`.
 
 ## 4. Tester chaque compte
 
@@ -42,7 +42,7 @@ Vérifie l'absence d'erreurs dans les deux fichiers. Ils contiennent les sorties
 | stagiaire | Stage!2026Med | role_catalogue |
 | analyste | Stats!2026Med | role_catalogue |
 
-Pour chaque compte, ouvre une vraie connexion, par exemple :
+Pour chaque compte, ouvrir une connexion distincte, par exemple :
 
 ```bash
 mysql -u app_media -p mediatheque
@@ -54,9 +54,9 @@ Puis :
 SELECT CURRENT_USER(), CURRENT_ROLE();
 ```
 
-Le rôle ne doit pas être `NONE`. Exécute les commandes de la matrice correspondant au compte. Recopie **OK** ou le numéro et SQLSTATE réellement affichés dans « Obtenu ». Une commande UPDATE acceptée reste un OK même si elle indique zéro ligne modifiée.
+Le rôle ne doit pas être `NONE`. Exécuter les commandes de la matrice correspondant au compte. Reporter **OK** ou le numéro et SQLSTATE réellement affichés dans « Obtenu ». Une commande UPDATE acceptée reste un OK même si elle indique zéro ligne modifiée.
 
-Pour les tests 3 et 4, encadre les deux commandes avec `START TRANSACTION;` et `ROLLBACK;` afin de ne pas modifier durablement la disponibilité de l'exemplaire 3. Après l'erreur attendue du test 4, saisis quand même `ROLLBACK;`.
+Pour les tests 3 et 4, encadrer les deux commandes avec `START TRANSACTION;` et `ROLLBACK;` afin de ne pas modifier durablement la disponibilité de l'exemplaire 3. Après l'erreur attendue du test 4, exécuter également `ROLLBACK;`.
 
 ### Test 12 : deux sessions
 
@@ -85,7 +85,7 @@ REVOKE SELECT ON mediatheque.reservation FROM 'analyste'@'localhost';
 SHOW GRANTS FOR 'analyste'@'localhost';
 ```
 
-4. Reconnecte l'analyste et répète le SELECT : refus attendu. Conserve les deux résultats. Aucun FLUSH PRIVILEGES n'est nécessaire.
+4. Reconnecter l’analyste et répéter le SELECT : refus attendu. Conserver les deux résultats. Aucun FLUSH PRIVILEGES n'est nécessaire.
 
 ## 5. Comprendre les choix
 
