@@ -91,6 +91,5 @@ Installer ensuite les triggers du binôme avant d'exécuter le scénario complet
 
 Ce README présente le contenu et les objectifs des travaux. Il ne certifie pas la réussite des tests. Les scripts du TP3 doivent encore être confrontés au schéma réel et validés avec les triggers du binôme ; les résultats observés sont à consigner dans les fichiers de tests correspondants.
 
-## Autrice
 
 
