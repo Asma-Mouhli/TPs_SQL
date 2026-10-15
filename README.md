@@ -66,12 +66,6 @@ Les trois procédures sont :
 
 La procédure d'emprunt contrôle l'existence et l'activité de l'adhérent, l'état et la disponibilité de l'exemplaire, le quota de cinq prêts et le plafond de 10 € de pénalités impayées. Les procédures de prêt et de retour utilisent une transaction et un handler d'erreur avec `ROLLBACK` et `RESIGNAL`.
 
-### Travail du binôme et intégration
-
-Les triggers et le scénario de tests sont pris en charge par le binôme. Les triggers doivent notamment calculer les dates manquantes, maintenir la disponibilité des exemplaires et journaliser les opérations.
-
-**Les triggers doivent être installés avant les tests d'emprunt et de retour.** Les procédures leur délèguent volontairement la mise à jour de `exemplaire.disponible`.
-
 ## Environnement et exécution
 
 - MySQL 8 et base `mediatheque` issue des fichiers de schéma et de données du cours.
