@@ -85,11 +85,5 @@ SOURCE TP3/01-fonctions.sql;
 SOURCE TP3/02-procedures.sql;
 ```
 
-Installer ensuite les triggers du binôme avant d'exécuter le scénario complet. Les appels métier peuvent modifier les données et valider leurs transactions : utiliser une base de TP dédiée.
-
-## État de validation
-
-Ce README présente le contenu et les objectifs des travaux. Il ne certifie pas la réussite des tests. Les scripts du TP3 doivent encore être confrontés au schéma réel et validés avec les triggers du binôme ; les résultats observés sont à consigner dans les fichiers de tests correspondants.
-
 
 
