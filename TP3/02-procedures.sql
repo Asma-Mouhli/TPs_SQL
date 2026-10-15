@@ -87,8 +87,8 @@ BEGIN
   SET v_jours = f_jours_de_retard(v_emprunt_id);
   SET v_montant = v_jours * 0.20;
   IF v_jours > 0 THEN
-    INSERT INTO penalite (adherent_id, emprunt_id, montant, motif, payee)
-    VALUES (v_adherent_id, v_emprunt_id, v_montant, CONCAT('Retard de ', v_jours, ' jour(s)'), 0);
+    INSERT INTO penalite (adherent_id, emprunt_id, montant, motif, date_creation, payee)
+    VALUES (v_adherent_id, v_emprunt_id, v_montant, CONCAT('Retard de ', v_jours, ' jour(s)'), CURDATE(), 0);
   END IF;
   COMMIT;
   SELECT v_emprunt_id AS emprunt_id, v_jours AS jours_de_retard, v_montant AS montant_facture;
