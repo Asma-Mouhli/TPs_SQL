@@ -93,4 +93,4 @@ Ce README présente le contenu et les objectifs des travaux. Il ne certifie pas 
 
 ## Autrice
 
-Asma Mouhli — Bachelor 2 Informatique, Ynov Lyon.
+
